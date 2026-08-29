@@ -2,7 +2,7 @@
 
 ![CI](https://github.com/pathumbandara0111/todo-devops-assignment/actions/workflows/ci.yml/badge.svg)
 
-A responsive Todo List web application developed as part of the Advanced Git & DevOps Team Collaboration Assignment.
+A responsive Todo List web application developed as part of the **Advanced Git & DevOps Team Collaboration Assignment**.
 
 ## 👥 Team Members
 
@@ -13,8 +13,7 @@ A responsive Todo List web application developed as part of the Advanced Git & D
 
 ## 📋 Project Overview
 
-A Todo List application demonstrating Git collaboration, feature branching, Pull Requests, code review, 
-Actions CI/CD, branch protection, and cloud deployment.
+The project demonstrates collaborative Git and DevOps practices including feature branching, Pull Requests, peer review, GitHub Actions CI, branch protection, merge-conflict resolution, release management, and Netlify deployment.
 
 Users can:
 - Add tasks
@@ -36,7 +35,7 @@ Users can:
 - Git
 - GitHub
 - GitHub Actions
-- Vercel
+- Netlify
 
 ## 🌿 Git Branching Strategy
 
@@ -48,26 +47,30 @@ main
        └── develop
             │
             ├── feature/todo-core
-            └── feature/ci-pipeline
+            ├── feature/ci-pipeline
+            ├── docs/readme
+            └── feature/netlify-deployment
 ```
 
-- `main` - Production-ready code
+- `main` - Production/release branch
 - `develop` - Integration and validation branch
 - `feature/todo-core` - Todo application functionality
 - `feature/ci-pipeline` - GitHub Actions CI configuration
+- `docs/readme` - Project documentation
+- `feature/netlify-deployment` - Netlify deployment configuration
 
 ## 🔄 Git Workflow
 
 1. Create a feature branch from `develop`
-2. Implement the required feature
+2. Implement the required change
 3. Create meaningful commits
 4. Push the feature branch
 5. Create a Pull Request
-6. Team member reviews the Pull Request
-7. Approved Pull Request is merged into `develop`
-8. CI validation runs automatically
-9. `develop` is promoted to `main` through a Release Pull Request
-10. `main` represents the production version
+6. A team member reviews the Pull Request
+7. The Pull Request is approved and merged into `develop`
+8. GitHub Actions CI validation runs
+9. The validated `develop` branch is promoted to `main` through a Release Pull Request
+10. `main` represents the production/release state
 
 ## 👨‍💻 Individual Contributions
 
@@ -77,18 +80,13 @@ main
 - Created and configured the GitHub repository
 - Established the Git branching structure
 - Configured `develop` and `main`
-- Created and maintained GitHub Actions CI workflow
+- Created and maintained GitHub Actions CI
+- Added deployment workflow/configuration
 - Configured branch protection rules
 - Managed Pull Requests and release workflow
-- Monitored CI results
+- Monitored CI and deployment checks
 - Coordinated the production release process
 - Prepared CI/CD and Git workflow documentation
-
-Relevant commits:
-- `304a222` — feat: add local storage persistence
-- `5a8a59f` — feat: add task deletion functionality
-- `6c8e8fb` — feat: add task completion functionality
-- `c34f8f3` — ci: add GitHub Actions build validation
 
 ### Kaluarachchi A.E. — Awish Easala
 **Role: Full-Stack Developer**
@@ -96,14 +94,62 @@ Relevant commits:
 - Developed Todo application functionality
 - Worked using the feature branch workflow
 - Implemented and improved Todo functionality
-- Created Pull Requests for feature integration
-- Performed code review and approval
+- Participated in Pull Requests
+- Performed peer code reviews and approvals
 - Participated in integration and release
 
-Relevant Pull Requests:
-- PR #1 — Todo core
-- PR #2 — CI pipeline
-- PR #3 — Release: promote develop to main
+## 🔀 Pull Requests & Code Review
+
+The repository contains **6 closed/merged Pull Requests**:
+
+### PR #1 — `feat: complete todo core functionality`
+```text
+feature/todo-core → develop
+```
+Todo core functionality was integrated after peer review and approval by Awish Easala.
+
+### PR #2 — `ci: add GitHub Actions build validation`
+```text
+feature/ci-pipeline → develop
+```
+GitHub Actions CI validation was added and reviewed before merging.
+
+### PR #3 — `release: promote develop to main`
+```text
+develop → main
+```
+The validated development state was promoted to the production branch.
+
+### PR #4 — `docs: add project README`
+```text
+docs/readme → main
+```
+Initial project documentation was added through a Pull Request.
+
+### PR #5 — `docs: update README and add Netlify deployment`
+```text
+feature/netlify-deployment → develop
+```
+README documentation and Netlify deployment configuration were added. CI and Netlify deployment checks passed, followed by peer approval from Awish Easala.
+
+### PR #6 — `release: promote develop to main`
+```text
+develop → main
+```
+The final validated development state, including the README and Netlify deployment configuration, was promoted to `main`.
+
+## 🧩 Merge Conflict Resolution
+
+A real merge conflict occurred during the final release workflow involving `README.md`.
+
+The conflict was resolved before PR #6 was merged. The final Pull Request shows:
+- README conflict detected
+- Conflict resolution completed
+- Peer approval by Awish Easala
+- All required checks passed
+- Release successfully merged into `main`
+
+This demonstrates practical collaborative conflict resolution rather than only documenting the procedure.
 
 ## ⚙️ Continuous Integration
 
@@ -113,52 +159,56 @@ The CI workflow is located at:
 .github/workflows/ci.yml
 ```
 
-It:
+The workflow:
 1. Checks out the repository
 2. Sets up Node.js
-3. Uses npm dependency caching
-4. Installs dependencies with `npm ci`
-5. Runs validation
-6. Builds the Vite application
+3. Installs dependencies using `npm ci`
+4. Runs project validation
+5. Builds the Vite application
 
-Triggers:
-- Pushes to `develop`
-- Pushes to feature branches
-- Pull Requests targeting `develop`
-
-Validation:
+The validation command is:
 
 ```bash
 npm run check
 ```
 
-The check executes:
+The check executes the application build:
 
 ```bash
 npm run build
 ```
 
-## 🚀 Continuous Deployment
-
-The production branch is:
+The repository's GitHub Actions build check is named:
 
 ```text
-main
+Build Application
 ```
 
-The deployment pipeline is designed to automatically deploy the application when production changes are merged into `main`.
+## 🚀 Continuous Deployment
 
-Deployment platform:
+### Deployment Platform
 
-**Vercel**
+**Netlify**
 
-Live deployment URL:
+The application is deployed through the connected Netlify project.
 
-> To be added after deployment setup.
+Production application:
+
+https://tododevopsassignment.netlify.app/
+
+The repository also contains:
+
+```text
+.github/workflows/deploy.yml
+```
+
+Netlify deployment checks/previews are visible on the Pull Requests, and the production application is publicly accessible.
 
 ## 🔐 Branch Protection
 
-The `develop` branch is protected using GitHub Rulesets.
+Both major branches are protected using GitHub Rulesets.
+
+### `develop`
 
 Configured protections include:
 - Pull Request required before merging
@@ -167,53 +217,24 @@ Configured protections include:
 - Force pushes blocked
 - Branch deletion restricted
 
-The production `main` branch is intended to remain protected so production changes are introduced through the approved Pull Request workflow.
+### `main`
 
-## 🔀 Pull Requests & Code Review
+The production branch is also protected so production changes are introduced through the approved Pull Request workflow.
 
-### Pull Request #1 — Todo Core
+Configured protections include:
+- Pull Request required before merging
+- Required CI status check
+- Force pushes blocked
+- Branch deletion restricted
 
-```text
-feature/todo-core → develop
-```
+## 🧪 CI & Deployment Evidence
 
-Reviewed and approved before merging.
+The repository demonstrates successful checks for the final release workflow, including:
 
-### Pull Request #2 — CI Pipeline
-
-```text
-feature/ci-pipeline → develop
-```
-
-Reviewed and approved before merging.
-
-### Pull Request #3 — Release
-
-```text
-develop → main
-```
-
-Promoted the validated development branch to production.
-
-## 🧩 Merge Conflict Resolution
-
-For collaborative development, merge conflicts are resolved by updating the feature branch with the latest `develop` changes:
-
-```bash
-git checkout develop
-git pull origin develop
-
-git checkout feature/your-feature
-git merge develop
-```
-
-If a conflict occurs, the team resolves the conflicting sections, removes conflict markers, and completes the merge:
-
-```bash
-git add .
-git commit -m "fix: resolve merge conflict"
-git push origin feature/your-feature
-```
+- GitHub Actions `Build Application` check passed
+- Netlify deployment/preview check passed
+- Peer review and approval completed
+- Final release Pull Request merged successfully
 
 ## 📦 Local Development
 
@@ -231,7 +252,7 @@ cd todo-devops-assignment
 npm ci
 ```
 
-Run development server:
+Run the development server:
 
 ```bash
 npm run dev
@@ -255,7 +276,8 @@ npm run check
 todo-devops-assignment/
 ├── .github/
 │   └── workflows/
-│       └── ci.yml
+│       ├── ci.yml
+│       └── deploy.yml
 ├── public/
 ├── src/
 ├── .gitignore
@@ -268,22 +290,31 @@ todo-devops-assignment/
 ## ✅ Assignment Evidence
 
 The repository demonstrates:
+
 - Public GitHub repository
 - Two-student team collaboration
+- Meaningful commit history
 - `main` production branch
 - `develop` integration branch
-- Feature branches
+- Multiple feature/documentation branches
 - Pull Requests
-- Peer code review
+- Peer code review and approval
 - GitHub Actions CI
+- Required status checks
 - Branch protection
-- Release workflow
+- Real merge-conflict resolution
+- Release Pull Requests
+- Netlify deployment
 - Automated build validation
 - Individual contribution history
-- Cloud deployment configuration
+- Project documentation
 
 ## 📄 Submission
 
-GitHub repository:
+**GitHub Repository:**
 
 https://github.com/pathumbandara0111/todo-devops-assignment
+
+**Live Application:**
+
+https://tododevopsassignment.netlify.app/
