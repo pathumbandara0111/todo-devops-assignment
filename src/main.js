@@ -56,10 +56,18 @@ function renderTodos() {
 
   todos.forEach((todo) => {
     const item = document.createElement('li')
-    item.className = 'todo-item'
+    item.className = `todo-item${todo.completed ? ' completed' : ''}`
 
     item.innerHTML = `
-      <span>${todo.title}</span>
+      <label class="todo-content">
+        <input
+          type="checkbox"
+          class="todo-checkbox"
+          data-id="${todo.id}"
+          ${todo.completed ? 'checked' : ''}
+        />
+        <span>${todo.title}</span>
+      </label>
     `
 
     todoList.appendChild(item)
@@ -68,6 +76,22 @@ function renderTodos() {
   taskCount.textContent = `${todos.length} ${todos.length === 1 ? 'task' : 'tasks'}`
   emptyState.hidden = todos.length > 0
 }
+
+todoList.addEventListener('change', (event) => {
+  if (!event.target.classList.contains('todo-checkbox')) {
+    return
+  }
+
+  const todoId = Number(event.target.dataset.id)
+
+  todos = todos.map((todo) =>
+    todo.id === todoId
+      ? { ...todo, completed: event.target.checked }
+      : todo
+  )
+
+  renderTodos()
+})
 
 todoForm.addEventListener('submit', (event) => {
   event.preventDefault()
