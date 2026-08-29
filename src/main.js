@@ -1,6 +1,21 @@
 import './style.css'
 
-let todos = []
+const STORAGE_KEY = 'todo-devops-assignment-todos'
+
+let todos = loadTodos()
+
+function loadTodos() {
+  try {
+    const savedTodos = localStorage.getItem(STORAGE_KEY)
+    return savedTodos ? JSON.parse(savedTodos) : []
+  } catch {
+    return []
+  }
+}
+
+function saveTodos() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
+}
 
 document.querySelector('#app').innerHTML = `
   <main class="todo-app">
@@ -99,6 +114,7 @@ todoList.addEventListener('change', (event) => {
       : todo
   )
 
+  saveTodos()
   renderTodos()
 })
 
@@ -111,6 +127,7 @@ todoList.addEventListener('click', (event) => {
 
   todos = todos.filter((todo) => todo.id !== todoId)
 
+  saveTodos()
   renderTodos()
 })
 
@@ -129,6 +146,8 @@ todoForm.addEventListener('submit', (event) => {
     title,
     completed: false,
   })
+
+  saveTodos()
 
   todoInput.value = ''
   todoInput.focus()
