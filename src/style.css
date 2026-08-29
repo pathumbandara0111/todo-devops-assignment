@@ -138,13 +138,19 @@ h1 {
   border-color: #e4e7ec;
 }
 
-.todo-list {
+.todo-item {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 0;
-  margin: 0;
-  list-style: none;
+  align-items: center;
+  min-height: 54px;
+  padding: 12px 14px;
+  color: #344054;
+  background: #f8fafc;
+  border: 1px solid #eaecf0;
+  border-radius: 12px;
+}
+
+.todo-item span {
+  overflow-wrap: anywhere;
 }
 
 .empty-state {

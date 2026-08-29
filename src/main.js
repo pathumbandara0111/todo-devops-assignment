@@ -1,5 +1,7 @@
 import './style.css'
 
+let todos = []
+
 document.querySelector('#app').innerHTML = `
   <main class="todo-app">
     <header class="app-header">
@@ -42,3 +44,51 @@ document.querySelector('#app').innerHTML = `
     </section>
   </main>
 `
+
+const todoForm = document.querySelector('#todo-form')
+const todoInput = document.querySelector('#todo-input')
+const todoList = document.querySelector('#todo-list')
+const taskCount = document.querySelector('#task-count')
+const emptyState = document.querySelector('#empty-state')
+
+function renderTodos() {
+  todoList.innerHTML = ''
+
+  todos.forEach((todo) => {
+    const item = document.createElement('li')
+    item.className = 'todo-item'
+
+    item.innerHTML = `
+      <span>${todo.title}</span>
+    `
+
+    todoList.appendChild(item)
+  })
+
+  taskCount.textContent = `${todos.length} ${todos.length === 1 ? 'task' : 'tasks'}`
+  emptyState.hidden = todos.length > 0
+}
+
+todoForm.addEventListener('submit', (event) => {
+  event.preventDefault()
+
+  const title = todoInput.value.trim()
+
+  if (!title) {
+    todoInput.focus()
+    return
+  }
+
+  todos.push({
+    id: Date.now(),
+    title,
+    completed: false,
+  })
+
+  todoInput.value = ''
+  todoInput.focus()
+
+  renderTodos()
+})
+
+renderTodos()
