@@ -13,7 +13,8 @@ A responsive Todo List web application developed as part of the Advanced Git & D
 
 ## 📋 Project Overview
 
-A Todo List application demonstrating Git collaboration, feature branching, Pull Requests, code review, GitHub Actions CI/CD, branch protection, and cloud deployment.
+A Todo List application demonstrating Git collaboration, feature branching, Pull Requests, code review, 
+Actions CI/CD, branch protection, and cloud deployment.
 
 Users can:
 - Add tasks
