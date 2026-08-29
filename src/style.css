@@ -177,6 +177,21 @@ h1 {
   text-decoration: line-through;
 }
 
+.delete-btn {
+  flex: 0 0 auto;
+  padding: 7px 10px;
+  color: #b42318;
+  background: #fff;
+  border: 1px solid #fecdca;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.delete-btn:hover {
+  background: #fef3f2;
+}
+
 .empty-state {
   padding: 48px 20px;
   text-align: center;

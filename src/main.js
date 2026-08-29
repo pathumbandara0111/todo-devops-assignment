@@ -59,16 +59,25 @@ function renderTodos() {
     item.className = `todo-item${todo.completed ? ' completed' : ''}`
 
     item.innerHTML = `
-      <label class="todo-content">
-        <input
-          type="checkbox"
-          class="todo-checkbox"
-          data-id="${todo.id}"
-          ${todo.completed ? 'checked' : ''}
-        />
-        <span>${todo.title}</span>
-      </label>
-    `
+    <label class="todo-content">
+      <input
+        type="checkbox"
+        class="todo-checkbox"
+        data-id="${todo.id}"
+        ${todo.completed ? 'checked' : ''}
+      />
+      <span>${todo.title}</span>
+    </label>
+
+    <button
+      class="delete-btn"
+      type="button"
+      data-id="${todo.id}"
+      aria-label="Delete ${todo.title}"
+    >
+      Delete
+    </button>
+  `
 
     todoList.appendChild(item)
   })
@@ -89,6 +98,18 @@ todoList.addEventListener('change', (event) => {
       ? { ...todo, completed: event.target.checked }
       : todo
   )
+
+  renderTodos()
+})
+
+todoList.addEventListener('click', (event) => {
+  if (!event.target.classList.contains('delete-btn')) {
+    return
+  }
+
+  const todoId = Number(event.target.dataset.id)
+
+  todos = todos.filter((todo) => todo.id !== todoId)
 
   renderTodos()
 })
