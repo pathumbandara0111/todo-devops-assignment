@@ -194,7 +194,7 @@ The application is deployed through the connected Netlify project.
 
 Production application:
 
-https://tododevopsassignment.netlify.app/
+[https://tododevopsassigment.netlify.app/](https://tododevopsassigment.netlify.app/)
 
 The repository also contains:
 
