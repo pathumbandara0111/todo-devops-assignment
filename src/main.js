@@ -3,6 +3,7 @@ import './style.css'
 const STORAGE_KEY = 'todo-devops-assignment-todos'
 
 let todos = loadTodos()
+let currentFilter = 'all'
 
 function loadTodos() {
   try {
@@ -65,40 +66,56 @@ const todoInput = document.querySelector('#todo-input')
 const todoList = document.querySelector('#todo-list')
 const taskCount = document.querySelector('#task-count')
 const emptyState = document.querySelector('#empty-state')
+const filterButtons = document.querySelectorAll('.filter-btn')
 
 function renderTodos() {
   todoList.innerHTML = ''
 
-  todos.forEach((todo) => {
+  const filteredTodos = todos.filter((todo) => {
+    if (currentFilter === 'active') {
+      return !todo.completed
+    }
+
+    if (currentFilter === 'completed') {
+      return todo.completed
+    }
+
+    return true
+  })
+
+  filteredTodos.forEach((todo) => {
     const item = document.createElement('li')
     item.className = `todo-item${todo.completed ? ' completed' : ''}`
 
     item.innerHTML = `
-    <label class="todo-content">
-      <input
-        type="checkbox"
-        class="todo-checkbox"
-        data-id="${todo.id}"
-        ${todo.completed ? 'checked' : ''}
-      />
-      <span>${todo.title}</span>
-    </label>
+      <label class="todo-content">
+        <input
+          type="checkbox"
+          class="todo-checkbox"
+          data-id="${todo.id}"
+          ${todo.completed ? 'checked' : ''}
+        />
+        <span>${todo.title}</span>
+      </label>
 
-    <button
-      class="delete-btn"
-      type="button"
-      data-id="${todo.id}"
-      aria-label="Delete ${todo.title}"
-    >
-      Delete
-    </button>
-  `
+      <button
+        class="delete-btn"
+        type="button"
+        data-id="${todo.id}"
+        aria-label="Delete ${todo.title}"
+      >
+        Delete
+      </button>
+    `
 
     todoList.appendChild(item)
   })
 
-  taskCount.textContent = `${todos.length} ${todos.length === 1 ? 'task' : 'tasks'}`
-  emptyState.hidden = todos.length > 0
+  const visibleCount = filteredTodos.length
+  taskCount.textContent = `${visibleCount} ${visibleCount === 1 ? 'task' : 'tasks'
+    }`
+
+  emptyState.hidden = visibleCount > 0
 }
 
 todoList.addEventListener('change', (event) => {
@@ -153,6 +170,21 @@ todoForm.addEventListener('submit', (event) => {
   todoInput.focus()
 
   renderTodos()
+})
+
+filterButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    currentFilter = button.dataset.filter
+
+    filterButtons.forEach((filterButton) => {
+      filterButton.classList.toggle(
+        'active',
+        filterButton === button
+      )
+    })
+
+    renderTodos()
+  })
 })
 
 renderTodos()
