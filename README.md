@@ -1,38 +1,29 @@
 # Todo DevOps Assignment
 
 ![CI](https://github.com/pathumbandara0111/todo-devops-assignment/actions/workflows/ci.yml/badge.svg)
-![Deploy](https://github.com/pathumbandara0111/todo-devops-assignment/actions/workflows/deploy.yml/badge.svg)
 
-A responsive Todo List web application developed for the **Advanced Git & DevOps Team Collaboration Assignment**.
+A responsive Todo List web application developed as part of the Advanced Git & DevOps Team Collaboration Assignment.
 
-## 👥 Group Information
+## 👥 Team Members
 
 | Student | Name as in LMS | Student ID | Role |
 |---|---|---|---|
 | Pathum Bandara | Bandara A.G.D.P | ITBNM-2211-0111 | DevOps Engineer |
 | Awish Easala | Kaluarachchi A.E. | ITBNM-2211-0139 | Full-Stack Developer |
 
-## 📋 Project Description
+## 📋 Project Overview
 
-A responsive Todo List application demonstrating professional Git and DevOps collaboration practices.
+A Todo List application demonstrating Git collaboration, feature branching, Pull Requests, code review, 
+Actions CI/CD, branch protection, and cloud deployment.
 
-### Features
-
+Users can:
 - Add tasks
 - Delete tasks
 - Mark tasks as completed
 - Filter tasks by All, Active, and Completed
-- Local storage persistence
-- Task counter
-- Responsive desktop and mobile interface
-
-## 🚀 Live Deployment
-
-**Platform:** Netlify
-
-**Live URL:** https://tododevopsassignment.netlify.app
-
-The production `main` branch is connected to Netlify for automatic deployment.
+- Store tasks using browser local storage
+- View the task counter
+- Use the application on desktop and mobile devices
 
 ## 🛠️ Technologies Used
 
@@ -45,75 +36,74 @@ The production `main` branch is connected to Netlify for automatic deployment.
 - Git
 - GitHub
 - GitHub Actions
-- Netlify
+- Vercel
 
-## 🌿 Branch Strategy
+## 🌿 Git Branching Strategy
 
 ```text
 main
-│
-└── develop
-    ├── feature/todo-core
-    └── feature/ci-pipeline
+  │
+  └── Production / Release Branch
+       │
+       └── develop
+            │
+            ├── feature/todo-core
+            └── feature/ci-pipeline
 ```
 
-- `main` — Production branch
-- `develop` — Development and integration branch
-- `feature/todo-core` — Todo functionality
-- `feature/ci-pipeline` — CI workflow
+- `main` - Production-ready code
+- `develop` - Integration and validation branch
+- `feature/todo-core` - Todo application functionality
+- `feature/ci-pipeline` - GitHub Actions CI configuration
 
 ## 🔄 Git Workflow
 
 1. Create a feature branch from `develop`
-2. Develop the required feature
+2. Implement the required feature
 3. Create meaningful commits
 4. Push the feature branch
 5. Create a Pull Request
 6. Team member reviews the Pull Request
-7. Merge the approved Pull Request into `develop`
+7. Approved Pull Request is merged into `develop`
 8. CI validation runs automatically
-9. Create a release Pull Request from `develop` to `main`
-10. Merge after approval
-11. Netlify deploys the production `main` branch
+9. `develop` is promoted to `main` through a Release Pull Request
+10. `main` represents the production version
 
 ## 👨‍💻 Individual Contributions
 
 ### Bandara A.G.D.P — Pathum Bandara
-
 **Role: DevOps Engineer**
 
 - Created and configured the GitHub repository
-- Established the branch structure
-- Configured `main` and `develop`
-- Configured GitHub Actions CI
-- Configured repository rules and branch protection
+- Established the Git branching structure
+- Configured `develop` and `main`
+- Created and maintained GitHub Actions CI workflow
+- Configured branch protection rules
 - Managed Pull Requests and release workflow
-- Configured Netlify production deployment
-- Coordinated CI/CD and release activities
+- Monitored CI results
+- Coordinated the production release process
+- Prepared CI/CD and Git workflow documentation
 
 Relevant commits:
-
-- `304a222` — `feat: add local storage persistence`
-- `5a8a59f` — `feat: add task deletion functionality`
-- `6c8e8fb` — `feat: add task completion functionality`
-- `c34f8f3` — `ci: add GitHub Actions build validation`
+- `304a222` — feat: add local storage persistence
+- `5a8a59f` — feat: add task deletion functionality
+- `6c8e8fb` — feat: add task completion functionality
+- `c34f8f3` — ci: add GitHub Actions build validation
 
 ### Kaluarachchi A.E. — Awish Easala
-
 **Role: Full-Stack Developer**
 
 - Developed Todo application functionality
 - Worked using the feature branch workflow
 - Implemented and improved Todo functionality
 - Created Pull Requests for feature integration
-- Performed peer code review and approval
-- Participated in integration and production release
+- Performed code review and approval
+- Participated in integration and release
 
 Relevant Pull Requests:
-
-- **PR #1** — Todo Core
-- **PR #2** — CI Pipeline
-- **PR #3** — Release: promote develop to main
+- PR #1 — Todo core
+- PR #2 — CI pipeline
+- PR #3 — Release: promote develop to main
 
 ## ⚙️ Continuous Integration
 
@@ -123,7 +113,18 @@ The CI workflow is located at:
 .github/workflows/ci.yml
 ```
 
-The CI pipeline checks out the repository, sets up Node.js, installs dependencies, validates the project, and builds the Vite application.
+It:
+1. Checks out the repository
+2. Sets up Node.js
+3. Uses npm dependency caching
+4. Installs dependencies with `npm ci`
+5. Runs validation
+6. Builds the Vite application
+
+Triggers:
+- Pushes to `develop`
+- Pushes to feature branches
+- Pull Requests targeting `develop`
 
 Validation:
 
@@ -131,51 +132,42 @@ Validation:
 npm run check
 ```
 
-Build:
+The check executes:
 
 ```bash
 npm run build
 ```
 
-## 🚢 Continuous Deployment
+## 🚀 Continuous Deployment
 
-The required deployment workflow is:
-
-```text
-.github/workflows/deploy.yml
-```
-
-Production deployment targets the `main` branch.
-
-**Deployment platform:** Netlify
-
-**Build command:**
+The production branch is:
 
 ```text
-npm run build
+main
 ```
 
-**Publish directory:**
+The deployment pipeline is designed to automatically deploy the application when production changes are merged into `main`.
 
-```text
-dist
-```
+Deployment platform:
 
-Netlify is also connected to the GitHub repository for automatic production deployment from `main`.
+**Vercel**
+
+Live deployment URL:
+
+> To be added after deployment setup.
 
 ## 🔐 Branch Protection
 
-The project uses GitHub repository rulesets.
+The `develop` branch is protected using GitHub Rulesets.
 
 Configured protections include:
-
 - Pull Request required before merging
 - Required approval
 - Required CI status check
 - Force pushes blocked
 - Branch deletion restricted
 
-The `main` branch is intended to remain protected so production changes are introduced through the approved Pull Request workflow.
+The production `main` branch is intended to remain protected so production changes are introduced through the approved Pull Request workflow.
 
 ## 🔀 Pull Requests & Code Review
 
@@ -205,7 +197,7 @@ Promoted the validated development branch to production.
 
 ## 🧩 Merge Conflict Resolution
 
-The project follows the standard Git conflict-resolution process for collaborative development.
+For collaborative development, merge conflicts are resolved by updating the feature branch with the latest `develop` changes:
 
 ```bash
 git checkout develop
@@ -215,7 +207,7 @@ git checkout feature/your-feature
 git merge develop
 ```
 
-After resolving conflicting sections:
+If a conflict occurs, the team resolves the conflicting sections, removes conflict markers, and completes the merge:
 
 ```bash
 git add .
@@ -225,9 +217,9 @@ git push origin feature/your-feature
 
 ## 📦 Local Development
 
-### Prerequisites
+### Requirements
 
-- Node.js 18 or higher
+- Node.js
 - npm
 - Git
 
@@ -239,19 +231,19 @@ cd todo-devops-assignment
 npm ci
 ```
 
-### Run
+Run development server:
 
 ```bash
 npm run dev
 ```
 
-### Build
+Build:
 
 ```bash
 npm run build
 ```
 
-### Validation
+Validation:
 
 ```bash
 npm run check
@@ -263,8 +255,7 @@ npm run check
 todo-devops-assignment/
 ├── .github/
 │   └── workflows/
-│       ├── ci.yml
-│       └── deploy.yml
+│       └── ci.yml
 ├── public/
 ├── src/
 ├── .gitignore
@@ -274,24 +265,25 @@ todo-devops-assignment/
 └── package-lock.json
 ```
 
-## ✅ Assignment Verification
+## ✅ Assignment Evidence
 
-- [x] Public GitHub repository
-- [x] All student names and IDs included
-- [x] `main` branch
-- [x] `develop` branch
-- [x] Feature branches
-- [x] Pull Requests and peer approval
-- [x] CI workflow
-- [x] Netlify deployment
-- [x] Live deployment URL
-- [ ] `deploy.yml` created and passing
-- [ ] `main` protection re-enabled
-- [ ] Merge-conflict evidence documented with the actual conflict/commit
-- [ ] Final repository verification
+The repository demonstrates:
+- Public GitHub repository
+- Two-student team collaboration
+- `main` production branch
+- `develop` integration branch
+- Feature branches
+- Pull Requests
+- Peer code review
+- GitHub Actions CI
+- Branch protection
+- Release workflow
+- Automated build validation
+- Individual contribution history
+- Cloud deployment configuration
 
 ## 📄 Submission
 
-The assignment requires **ONLY the GitHub repository link** to be submitted in the LMS.
+GitHub repository:
 
-https://github.com/pathumbandara0111/todo-devops-assignment.git
+https://github.com/pathumbandara0111/todo-devops-assignment
