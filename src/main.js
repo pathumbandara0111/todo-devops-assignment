@@ -95,18 +95,24 @@ function renderTodos() {
           data-id="${todo.id}"
           ${todo.completed ? 'checked' : ''}
         />
-        <span>${todo.title}</span>
+        <span class="todo-title"></span>
       </label>
 
       <button
         class="delete-btn"
         type="button"
         data-id="${todo.id}"
-        aria-label="Delete ${todo.title}"
       >
         Delete
       </button>
     `
+
+    item.querySelector('.todo-title').textContent = todo.title
+
+    item.querySelector('.delete-btn').setAttribute(
+      'aria-label',
+      `Delete ${todo.title}`
+    )
 
     todoList.appendChild(item)
   })
